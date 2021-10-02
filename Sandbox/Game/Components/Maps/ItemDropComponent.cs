@@ -24,7 +24,7 @@ namespace Sandbox.Game.Components.Maps {
         public override void Start() {
             GetComponent<SpriteRendererComponent>().SetTexture(i.texture, (int)i.texture.Size.X * 2);
             SetComponent<RigidBodyComponent>(new RigidBodyComponent(new Vector2f(0, 25), new Vector2f(10, 20)));
-            GetComponent<RigidBodyComponent>().Velocity = new Vector2f(new Random().Next(-1, 2), new Random().Next(-1, 2)) * 10;
+            GetComponent<RigidBodyComponent>().Velocity = new Vector2f(new Random().Next(-1, 2), new Random().Next(-1, 2)) * 4;
         }
 
         public override void Update() {
