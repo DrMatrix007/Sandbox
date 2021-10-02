@@ -65,7 +65,7 @@ namespace Sandbox.Game.Components.Maps {
                     tilemap.SetTile(i, -y, items["grass"].ToBlock());
                 }
                 if (i == 0) {
-                    Console.WriteLine('?');
+                    //Console.WriteLine('?');
 
                     var p = playerProv.Get();
 
