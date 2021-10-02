@@ -37,8 +37,8 @@ namespace Sandbox.Game.Worlds {
             var mapProvider = new LockValueProvider<GenerationMapComponent>();
             var pointerProvider = new LockValueProvider<PointerMapComponent>();
 
-            playerProvider.SetValue(new PlayerComponent(pointerProvider, mapProvider,invenProv));
-            mapProvider.SetValue(new GenerationMapComponent(items,playerProvider));
+            playerProvider.SetValue(new PlayerComponent(pointerProvider, mapProvider, invenProv));
+            mapProvider.SetValue(new GenerationMapComponent(items, playerProvider));
             pointerProvider.SetValue(new PointerMapComponent(new Tile(TextureManager.GetTexture("Assets/Items/Pointer.png")), playerProvider));
 
             playerProvider.Lock();
@@ -66,6 +66,11 @@ namespace Sandbox.Game.Worlds {
                 10, Color.White, Color.Black, FontManager.CascadiaCode, 10, true
                 ));
             AddUIObject(fpsui);
+
+            var gameobjectCountUI = new TextConsumerUIObject(new Anchor(new(80, 10), new(20, 10)), new FunctionProvider<string>(() => {
+                return $"GameObjects: {this.Count()}";
+            }), new UITextStyle(200, Color.Black, Color.White, FontManager.CascadiaCode, isResize: true));
+            AddUIObject(gameobjectCountUI);
         }
     }
 }

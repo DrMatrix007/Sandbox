@@ -1,4 +1,5 @@
-﻿using MatrixEngine.GameObjects.Components;
+﻿using MatrixEngine.GameObjects;
+using MatrixEngine.GameObjects.Components;
 using MatrixEngine.GameObjects.Components.PhysicsComponents;
 using MatrixEngine.GameObjects.Components.RenderComponents;
 using MatrixEngine.GameObjects.Components.TilemapComponents;
@@ -68,7 +69,7 @@ namespace Sandbox.Game.Components.Maps {
 
                     var p = playerProv.Get();
 
-                    p.Transform.position = new Vector2f(i, -v -10);
+                    p.Transform.position = new Vector2f(i, -v - 10);
                     p.GetComponent<RigidBodyComponent>().Velocity = new Vector2f();
                 }
             }
@@ -80,7 +81,6 @@ namespace Sandbox.Game.Components.Maps {
 
         public void Damage(Vector2i pos, float d) {
             var b = tilemap.GetTileFromTilemapPos<Block>(pos);
-            
 
             if (b == null) {
                 return;
@@ -88,9 +88,10 @@ namespace Sandbox.Game.Components.Maps {
 
             tilemap.SetTile(pos, b);
             if (b.Damage(d)) {
+                var g = new GameObject(tilemap.GetWorldPosFromTilePos(pos), new ItemDropComponent(b.Item));
+                this.Scene.AddGameObject(g);
                 tilemap.SetTile(pos, null);
             }
         }
-
     }
 }

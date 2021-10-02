@@ -8,9 +8,12 @@ namespace Sandbox.Game.Items {
 
         private readonly float MaxHP;
 
+        public readonly Item Item;
+
         public Block(Item item) : base(item.texture) {
             BlockHP = item.durability;
             MaxHP = BlockHP;
+            Item = item;
         }
 
         public bool Damage(float val) {
