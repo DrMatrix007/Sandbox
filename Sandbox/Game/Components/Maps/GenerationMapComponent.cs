@@ -33,30 +33,34 @@ namespace Sandbox.Game.Components.Maps {
             get => tilemap;
         }
 
-        public GenerationMapComponent(ItemLibrary items, Provider<PlayerComponent> prov) {
+        public GenerationMapComponent(ItemLibrary items, Provider<PlayerComponent> prov)
+        {
             this.items = items;
             playerProv = prov;
         }
 
-        public override void Setup() {
+        public override void Setup()
+        {
             base.Setup();
 
             SetComponent<RigidBodyComponent>(new RigidBodyComponent(true));
             SetComponent<ColliderComponent>(new ColliderComponent(ColliderComponent.ColliderType.Tilemap));
         }
 
-        public override void Start() {
+        public override void Start()
+        {
             tilemap = GetComponent<TilemapComponent>();
 
             tilemap.pixelsPerUnit = 16;
 
-            perl = new PerlinNoise1D(10000, 10, new MatrixEngine.Utilities.Range(30, 50));
+            perl = new PerlinNoise1D(10000, 100, new MatrixEngine.Utilities.Range(300, 500));
             perl.Generate();
 
             OperationManager.AddOperation(Generate().ToOperation());
         }
 
-        public IEnumerator Generate() {
+        public IEnumerator Generate()
+        {
             var w = perl.size / 2;
 
             for (int i = -w; i < w; i++) {
@@ -69,17 +73,19 @@ namespace Sandbox.Game.Components.Maps {
 
                     var p = playerProv.Get();
 
-                    p.Transform.position = new Vector2f(i, -v - 10);
+                    p.Transform.position = new Vector2f(i, -v - 100);
                     p.GetComponent<RigidBodyComponent>().Velocity = new Vector2f();
                 }
             }
             yield return null;
         }
 
-        public override void Update() {
+        public override void Update()
+        {
         }
 
-        public void Damage(Vector2i pos, float d) {
+        public void Damage(Vector2i pos, float d)
+        {
             var b = tilemap.GetTileFromTilemapPos<Block>(pos);
 
             if (b == null) {
@@ -88,8 +94,8 @@ namespace Sandbox.Game.Components.Maps {
 
             tilemap.SetTile(pos, b);
             if (b.Damage(d)) {
-                var g = new GameObject(tilemap.GetWorldPosFromTilePos(pos), new ItemDropComponent(b.Item));
-                this.Scene.AddGameObject(g);
+                //var g = new GameObject(tilemap.GetWorldPosFromTilePos(pos), new ItemDropComponent(b.Item));
+                //this.Scene.AddGameObject(g);
                 tilemap.SetTile(pos, null);
             }
         }

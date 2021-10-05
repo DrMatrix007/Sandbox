@@ -17,17 +17,22 @@ namespace Sandbox.Game.Components.Maps {
     public class ItemDropComponent : Component {
         private Item i;
 
-        public ItemDropComponent(Item i) {
+        private Random random = new Random();
+
+        public ItemDropComponent(Item i)
+        {
             this.i = i;
         }
 
-        public override void Start() {
+        public override void Start()
+        {
             GetComponent<SpriteRendererComponent>().SetTexture(i.texture, (int)i.texture.Size.X * 2);
-            SetComponent<RigidBodyComponent>(new RigidBodyComponent(new Vector2f(0, 25), new Vector2f(10, 20)));
-            GetComponent<RigidBodyComponent>().Velocity = new Vector2f(new Random().Next(-1, 2), new Random().Next(-1, 2)) * 4;
+            SetComponent<RigidBodyComponent>(new RigidBodyComponent(new Vector2f(0, 30), new Vector2f(10 + random.Next(-5, 6), 20 + random.Next(-5, 6))));
+            GetComponent<RigidBodyComponent>().Velocity = new Vector2f(random.Next(-1, 2), random.Next(-1, 2)) * 4;
         }
 
-        public override void Update() {
+        public override void Update()
+        {
             if (RigidBodyComponent.TouchDown) {
                 //RigidBodyComponent.isStatic = true;
             }
