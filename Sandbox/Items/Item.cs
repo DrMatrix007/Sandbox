@@ -1,7 +1,7 @@
 ﻿using SFML.Graphics;
 using System;
 
-namespace Sandbox.Game.Items {
+namespace Sandbox.Items {
 
     public enum ItemType {
         Tool,

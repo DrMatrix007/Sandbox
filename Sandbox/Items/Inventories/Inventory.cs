@@ -1,11 +1,10 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sandbox.Game.Items.Inventories {
+namespace Sandbox.Items.Inventories {
     public class Inventory {
 
         public ItemStack[] itemStacks;

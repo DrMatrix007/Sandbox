@@ -1,7 +1,6 @@
-﻿using MatrixEngine.GameObjects.Components.TilemapComponents;
-using SFML.Graphics;
+﻿using SFML.Graphics;
 
-namespace Sandbox.Game.Items {
+namespace Sandbox.Items {
 
     public class Block : Tile {
         private float BlockHP;
@@ -18,7 +17,7 @@ namespace Sandbox.Game.Items {
 
         public bool Damage(float val) {
             BlockHP -= val;
-            color = new Color((byte)(255 * (BlockHP / MaxHP)), (byte)(255 * (BlockHP / MaxHP)), (byte)(255 * (BlockHP / MaxHP)), (byte)(255 * (BlockHP / MaxHP)));
+            Color = new Color((byte)(255 * (BlockHP / MaxHP)), (byte)(255 * (BlockHP / MaxHP)), (byte)(255 * (BlockHP / MaxHP)), (byte)(255 * (BlockHP / MaxHP)));
             return BlockHP <= 0;
         }
     }
